@@ -1,4 +1,0 @@
-source 'https://rubygems.org'
-
-gem 'libxml-ruby'
-#gem 'bzip2-ruby'
