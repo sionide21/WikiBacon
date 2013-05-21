@@ -1,0 +1,5 @@
+#! /usr/bin/env ruby
+require 'wiki_bacon'
+
+dump_file = ARGV.shift || STDIN.fileno
+WikiBacon.run dump_file
