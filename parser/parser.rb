@@ -29,12 +29,17 @@ end
 
 
 class Page
+  LINK_REGEX = /\[\[[^\]]+\]\]/
   attr_reader :reader, :title, :text
 
   def initialize(xml)
     @reader = XML::Reader.string xml
     @title = @text = nil
     parse
+  end
+
+  def links
+    return text.scan(LINK_REGEX).map{ |l| WikiLink.new l }
   end
 
   private :reader
@@ -50,6 +55,12 @@ class Page
       end
     end
   end
+
+  class WikiLink
+    def initialize(link)
+      @link = link
+    end
+  end
 end
 
 
@@ -61,9 +72,10 @@ class Application
   end
 
   def run
-    dump.lazy.take(1000000).each do |xml|
-      page = Page.new xml
-      puts page.title
+    # puts dump.lazy.map{|x| Page.new x}.find{|p| p.title == "International Atomic Time"}.text
+
+    dump.lazy.take(100).map{|x| Page.new x}.each do |page|
+      puts "#{page.title} #{page.links.length}"
     end
   end
 
