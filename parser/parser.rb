@@ -82,5 +82,5 @@ end
 
 # Oops, my python is showing
 if __FILE__ == $0
-  Application.new(ARGV[0]).run
+  Application.new(ARGV[0] || STDIN.fileno).run
 end
