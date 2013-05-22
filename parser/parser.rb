@@ -38,6 +38,10 @@ class Page
     parse
   end
 
+  def normal_article?
+    not title.include? ':'
+  end
+
   def links
     return text.scan(LINK_REGEX).map{ |l| WikiLink.new l }
   end
@@ -57,8 +61,15 @@ class Page
   end
 
   class WikiLink
-    def initialize(link)
-      @link = link
+    attr_reader :raw
+
+    def initialize(raw)
+      @raw = raw
+    end
+
+    def internal?
+      # Ignore portals for now
+      not raw.include? ':'
     end
   end
 end
