@@ -93,19 +93,11 @@ class WikiLink
   end
 
   def unalias(link)
-    if link.include? '|'
-      link.split('|').first
-    else
-      link
-    end
+    link.split('|').first
   end
 
   def unsection(link)
-    if link.include? '#'
-      link.split('#').first
-    else
-      link
-    end
+    link.split('#').first
   end
 
   def canonicalize(link)
