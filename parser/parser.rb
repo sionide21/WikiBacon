@@ -29,7 +29,7 @@ end
 
 
 class Page
-  LINK_REGEX = /\[\[[^\]]+\]\]/
+  LINK_REGEX = /\[\[([^\]]+)\]\]/
   attr_reader :reader, :title, :text
 
   def initialize(xml)
@@ -43,7 +43,7 @@ class Page
   end
 
   def links
-    return text.scan(LINK_REGEX).map{ |l| WikiLink.new l }
+    return text.scan(LINK_REGEX).map{ |l,| WikiLink.new l }
   end
 
   private :reader
