@@ -7,13 +7,13 @@ module WikiBacon
     end
 
     def prefix
-      if prefix = raw[/^([^:]+):/, 1]
+      if prefix = raw[/^:?([^:]+):/, 1]
         clean(prefix).capitalize
       end
     end
 
     def page_name
-      capitalize_first(clean(raw[/^([^:]+:)?([^|]+)/, 2]))
+      capitalize_first(clean(raw[/^:?([^:]+:)?([^|]+)/, 2]))
     end
 
     def target
